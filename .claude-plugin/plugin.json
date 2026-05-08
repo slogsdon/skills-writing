@@ -1,0 +1,7 @@
+{
+  "name": "skills-writing",
+  "version": "0.1.0",
+  "description": "Writing quality and style skills — humanize for natural voice, ms-style-pass for Microsoft Writing Style Guide compliance.",
+  "author": { "name": "Shane Logsdon" },
+  "license": "MIT"
+}
