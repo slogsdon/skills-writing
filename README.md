@@ -1,3 +1,5 @@
+> **[shane.logsdon.io](https://shane.logsdon.io)** — writing and projects on agentic workflows, web standards, and payments engineering.
+
 # skills-writing
 
 Writing quality and style skills for Claude Code. 2 skills for humanizing AI text and applying Microsoft Writing Style Guide.
