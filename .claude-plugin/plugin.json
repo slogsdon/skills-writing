@@ -1,7 +1,7 @@
 {
   "name": "skills-writing",
-  "version": "0.1.0",
-  "description": "Writing quality and style skills — humanize for natural voice, ms-style-pass for Microsoft Writing Style Guide compliance.",
+  "version": "0.2.0",
+  "description": "Writing quality and style skills — humanize for natural voice, ms-style-pass for Microsoft Writing Style Guide compliance, plain-language for ISO 24495-1, ste100 for ASD-STE100 Simplified Technical English.",
   "author": { "name": "Shane Logsdon" },
   "license": "MIT"
 }
