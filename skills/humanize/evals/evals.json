@@ -1,0 +1,182 @@
+{
+  "skill_name": "humanize",
+  "description": "Behavioral cases for the humanize voice edit. Two of these are false-positive cases: they fail if the skill over-corrects a deliberate choice. Those matter most, because over-correction is the failure mode the skill was rewritten to prevent.",
+  "evals": [
+    {
+      "id": 1,
+      "category": "filler_fragment",
+      "prompt": "Humanize this: \"The approach is more specific. More actionable. Closer to the real problem.\"",
+      "expected_output": "The three fragments merge into one sentence. All three qualities survive.",
+      "assertions": [
+        {
+          "name": "fragments-merged",
+          "check": "The three fragments are joined into a single sentence rather than left as three standalone fragments"
+        },
+        {
+          "name": "meaning-preserved",
+          "check": "All three qualities (more specific, more actionable, closer to the real problem) are still present"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "category": "false_positive_landing_fragment",
+      "prompt": "Humanize this paragraph: \"I have a 327-name scored lead tracker for my product. Behind it sits a CRM with 41 notes and a 16-status funnel, every stage defined. Eight blog posts are finished. Three emails sent. One reply. Zero closes.\"",
+      "expected_output": "The closing three-beat sequence stays as three sentences. It lands a build-up, so merging it destroys the punch.",
+      "assertions": [
+        {
+          "name": "landing-fragment-preserved",
+          "check": "'Three emails sent. One reply. Zero closes.' remains as three separate sentences (or the equivalent short landing beat)"
+        },
+        {
+          "name": "no-merger",
+          "check": "The three closing beats are NOT merged into one comma-joined sentence"
+        },
+        {
+          "name": "numbers-preserved",
+          "check": "327, 41, 16, and eight all survive unchanged"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "category": "false_positive_no_hedge_added",
+      "prompt": "Humanize this: \"The build finished in 40 minutes. The team shipped it the same day.\"",
+      "expected_output": "The sentences stay committed. No hedge is added to either.",
+      "assertions": [
+        {
+          "name": "no-hedge-added",
+          "check": "No hedge word or phrase is introduced - none of: so far, with any certainty, about, roughly, may, might, could, perhaps, seems, appears, tends"
+        },
+        {
+          "name": "no-not-only-butt",
+          "check": "The phrase 'not only' does not appear anywhere in the output"
+        },
+        {
+          "name": "certainty-preserved",
+          "check": "'The build finished in 40 minutes' remains a plain assertion rather than being softened or reworded to imply uncertainty"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "category": "hedge_preservation",
+      "prompt": "Humanize this: \"Startup is about 12% faster so far, though we have only tested Pixel 8.\"",
+      "expected_output": "The existing hedges and the scope limit survive intact. Nothing is added.",
+      "assertions": [
+        {
+          "name": "existing-hedges-preserved",
+          "check": "'so far' and the approximate force of 'about 12%' both survive"
+        },
+        {
+          "name": "scope-preserved",
+          "check": "The Pixel 8 limitation is retained"
+        },
+        {
+          "name": "no-hedge-added",
+          "check": "No additional hedge is inserted beyond the ones already in the source"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "category": "hard_refusal_colon_reveal",
+      "prompt": "Humanize this: \"What you lose when you defer: auditability.\"",
+      "expected_output": "The single-noun colon reveal becomes a phrase containing a verb.",
+      "assertions": [
+        {
+          "name": "colon-reveal-expanded",
+          "check": "The abstract noun is expanded into a phrase that includes a verb, e.g. 'your ability to audit the work'"
+        },
+        {
+          "name": "no-bare-single-noun-reveal",
+          "check": "The output does not end a clause on a single abstract noun after a colon"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "category": "hard_refusal_em_dash",
+      "prompt": "Humanize this: \"The model — to its credit — usually finds a path. The fix — and this matters — is composable systems.\"",
+      "expected_output": "Every em-dash is gone. No comma-heavy stutter replaces them.",
+      "assertions": [
+        {
+          "name": "no-em-dash-remains",
+          "check": "Neither the em-dash character nor an en-dash used as punctuation appears anywhere in the output"
+        },
+        {
+          "name": "meaning-preserved",
+          "check": "Both the 'to its credit' aside and the 'this matters' emphasis survive in some form"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "category": "hard_refusal_semicolon",
+      "prompt": "Humanize this: \"The spec defines the work; the agent executes against it.\"",
+      "expected_output": "The semicolon becomes a period and a new sentence.",
+      "assertions": [
+        {
+          "name": "semicolon-removed",
+          "check": "No semicolon joins two independent clauses in the output"
+        },
+        {
+          "name": "both-clauses-survive",
+          "check": "Both the spec clause and the agent clause are still present"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "category": "no_fabrication",
+      "prompt": "Humanize this: \"The launch had some problems. Users complained and the team fixed things fast. This taught us to prepare better.\"",
+      "expected_output": "Either the passage stays plain, or the missing specifics are marked as open questions. No detail is invented, and the motivational close is not preserved as-is.",
+      "assertions": [
+        {
+          "name": "no-invented-specifics",
+          "check": "No incident, outage, user count, date, quotation, metric, or named person is added that was not in the source"
+        },
+        {
+          "name": "gap-marked-or-plain",
+          "check": "The output either keeps the account plain or leaves an explicit [TK: ...] question requesting the missing detail"
+        },
+        {
+          "name": "no-sanitized-lesson-close",
+          "check": "The closing 'This taught us to prepare better' is not left as a generic motivational summary"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "category": "voice_preservation",
+      "prompt": "Humanize this: \"I got quite good at prompting. The problem was somewhere I hadn't looked yet.\"",
+      "expected_output": "The first-person confessional register survives untouched.",
+      "assertions": [
+        {
+          "name": "confessional-preserved",
+          "check": "'I got quite good at prompting' is not rewritten into resume language such as 'I became skilled at'"
+        },
+        {
+          "name": "first-person-kept",
+          "check": "Neither first-person claim is converted to passive or impersonal construction"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "category": "no_detector_claim",
+      "prompt": "Humanize this: \"In today's fast-moving AI landscape, prompt engineering has become a critical skill that developers must master.\"",
+      "expected_output": "Prose is improved and no detector result is asserted.",
+      "assertions": [
+        {
+          "name": "no-detector-claim",
+          "check": "The response does not claim the text will pass, evade, or score on an AI detector, and does not present a detector score as evidence of quality"
+        },
+        {
+          "name": "throat-clearing-removed",
+          "check": "The 'In today's fast-moving AI landscape' opener is removed or replaced with something concrete"
+        }
+      ]
+    }
+  ]
+}
