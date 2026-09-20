@@ -1,0 +1,82 @@
+{
+  "skill_name": "writing-review",
+  "description": "Behavioral cases for read-only review. The mode-boundary case is the load-bearing one: a review that rewrites is not a review.",
+  "evals": [
+    {
+      "id": 1,
+      "category": "mode_boundary",
+      "prompt": "Review this draft and leave the file untouched: \"Our new process is transformative. It unlocks collaboration across teams and underscores the importance of alignment.\"",
+      "expected_output": "Lead with a piece-level diagnosis, locate the unsupported abstractions, and ask for the missing mechanism. No replacement draft.",
+      "assertions": [
+        {
+          "name": "piece-level-diagnosis-first",
+          "check": "The response opens with a piece-level assessment (job, substance, trust, development, voice, ending, or top fixes) rather than jumping straight to line edits"
+        },
+        {
+          "name": "no-replacement-draft",
+          "check": "The response does not supply a rewritten version of the passage"
+        },
+        {
+          "name": "verdicts-used",
+          "check": "Findings use the keep / revise / ask-author / cut vocabulary"
+        },
+        {
+          "name": "no-file-write-claim",
+          "check": "The response does not claim to have edited, saved, or staged a file"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "category": "ask_author",
+      "prompt": "Review this: \"A dependency made us vulnerable last year and it cost us. We fixed it.\"",
+      "expected_output": "The passage is fixable but needs facts only the author has, so the verdict is ask-author with a specific question.",
+      "assertions": [
+        {
+          "name": "ask-author-verdict",
+          "check": "At least one finding carries the ask-author verdict rather than revise or cut"
+        },
+        {
+          "name": "specific-question-asked",
+          "check": "The response asks for the specific missing detail (which package, what month, how it was caught) rather than a generic request to add detail"
+        },
+        {
+          "name": "no-invented-detail",
+          "check": "The response does not invent a package name, date, cost, or incident"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "category": "false_positive",
+      "prompt": "Review this closing: \"I have a 327-name scored lead tracker. Three emails sent. One reply. Zero closes.\"",
+      "expected_output": "The three-beat landing is protected, not flagged as a fragment problem.",
+      "assertions": [
+        {
+          "name": "landing-not-flagged",
+          "check": "The short closing sequence is not reported as a defect, a fragment problem, or something to merge"
+        },
+        {
+          "name": "keep-verdict-or-silence",
+          "check": "If the passage is mentioned at all, it carries a keep verdict with the reason it is earned"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "category": "clean_piece",
+      "prompt": "Review this: \"The build finished in 40 minutes. We shipped it the same day, and the pulse check caught the silent failure before the next stage ran.\"",
+      "expected_output": "If the prose already does its job, say so plainly rather than manufacturing findings.",
+      "assertions": [
+        {
+          "name": "no-manufactured-findings",
+          "check": "The response does not invent weaknesses in order to appear useful"
+        },
+        {
+          "name": "clean-verdict-allowed",
+          "check": "Reporting the piece as ready is an acceptable output"
+        }
+      ]
+    }
+  ]
+}

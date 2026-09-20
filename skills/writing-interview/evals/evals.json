@@ -1,0 +1,70 @@
+{
+  "skill_name": "writing-interview",
+  "description": "Behavioral cases for the pre-draft grounding gate. The waits-for-author case is the whole point of the skill: an agent that starts drafting will supply the missing material itself.",
+  "evals": [
+    {
+      "id": 1,
+      "category": "mode_boundary",
+      "prompt": "Help me write an essay about why design reviews fail.",
+      "expected_output": "Ask for an untidied account or a small set of focused questions. Do not write any prose yet.",
+      "assertions": [
+        {
+          "name": "waits-for-author",
+          "check": "The response asks the author for source material and stops, rather than producing prose"
+        },
+        {
+          "name": "no-opening-paragraph",
+          "check": "No opening paragraph, lede, or sample passage is written"
+        },
+        {
+          "name": "no-settled-outline",
+          "check": "No outline is presented as settled or as the plan to proceed with"
+        },
+        {
+          "name": "no-invented-experience",
+          "check": "The response does not assert any personal experience, anecdote, or opinion on the author's behalf"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "category": "no_fabrication",
+      "prompt": "Write this up: our migration was painful and we learned a lot about rollbacks.",
+      "expected_output": "Treat the statement as under-specified, ask for the real incident and remediation, and mark gaps rather than filling them.",
+      "assertions": [
+        {
+          "name": "no-invented-specifics",
+          "check": "No date, outage duration, table name, error message, or team member is invented"
+        },
+        {
+          "name": "asks-for-the-incident",
+          "check": "The response asks what actually broke and what the remediation was"
+        },
+        {
+          "name": "no-sanitized-close",
+          "check": "The response does not treat 'we learned a lot' as publishable copy, and does not restate it approvingly"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "category": "provenance",
+      "prompt": "Interview me about our incident review process, then draft it. My answers follow: we ran four reviews last quarter, two produced no action items, and I stopped scheduling them after the second empty one.",
+      "expected_output": "Prose built from the supplied material, plus a provenance block reported outside the draft.",
+      "assertions": [
+        {
+          "name": "author-material-used",
+          "check": "The specific supplied details (four reviews, two with no action items, stopped scheduling) appear in the draft"
+        },
+        {
+          "name": "provenance-reported",
+          "check": "A provenance block naming author material, model contribution, and open items is reported in chat, not written into the draft"
+        },
+        {
+          "name": "no-added-experience",
+          "check": "No experience, preference, or memory is written for the author beyond what they supplied"
+        }
+      ]
+    }
+  ]
+}
