@@ -177,6 +177,46 @@
           "check": "The 'In today's fast-moving AI landscape' opener is removed or replaced with something concrete"
         }
       ]
+    },
+    {
+      "id": 11,
+      "category": "social_register_vocabulary",
+      "prompt": "Humanize this for an X post: \"261 skills were sitting in my system prompt. 187,801 characters of names and descriptions, on every request.\"",
+      "expected_output": "Implementation vocabulary is replaced with the reader's vocabulary on a social surface: 'system prompt' becomes 'configuration', and 'prompt' becomes 'context'.",
+      "assertions": [
+        {
+          "name": "implementation-vocabulary-swapped",
+          "check": "On a social or short-form surface, 'system prompt' becomes 'configuration' and 'prompt' becomes 'context'"
+        },
+        {
+          "name": "not-a-brevity-edit",
+          "check": "The substitution is not driven by length: 'configuration' is the same character count as 'system prompt'"
+        },
+        {
+          "name": "technical-surface-preserved",
+          "check": "The same implementation terms are kept when the surface is technical documentation rather than social"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "category": "coined_label_to_imperative",
+      "prompt": "Humanize this: \"Sharp edge if you try it: skills Pi loads from directories you haven't listed leave the prompt and don't enter search.\"",
+      "expected_output": "The coined label plus colon becomes a plain imperative, and 'the prompt' becomes 'your config'.",
+      "assertions": [
+        {
+          "name": "coined-label-replaced-by-imperative",
+          "check": "'Sharp edge if you try it:' becomes a plain imperative such as 'Beware if you try it.'"
+        },
+        {
+          "name": "no-label-plus-colon",
+          "check": "The output does not open a caveat by coining a label and following that label with a colon"
+        },
+        {
+          "name": "possessive-second-person",
+          "check": "The warning addresses the reader directly, as in 'your config' rather than 'the prompt'"
+        }
+      ]
     }
   ]
 }

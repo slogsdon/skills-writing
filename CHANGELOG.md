@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.4.0 — 2026-09-21
+
+**Two register rules taken from Shane's own hand edits to the
+`pi-deferred-skill-catalog` posts.** Both were edits he made on top of a
+humanized draft, so they are evidence rather than inference. Thin evidence
+though: two changes across one release.
+
+- **Social register vocabulary.** On social and short-form surfaces the reader's
+  vocabulary replaces the implementation's, even when the subject is technical.
+  "system prompt" becomes "configuration", and "prompt" becomes "context". This
+  is not a brevity edit: "configuration" is the same character count as "system
+  prompt", and "context" is longer than "prompt". The rule is scoped to
+  short-form social. LinkedIn kept the implementation terms in the same batch,
+  and whether that is deliberate is recorded as an open question in
+  `Knowledge/Projects/Personal Brand/Voice Profile Amendment — Social Register`.
+- **Coined labels demoted.** A warning or caveat opens with a plain imperative
+  ("Beware if you try it.") rather than a coined label followed by a colon
+  ("Sharp edge if you try it:").
+
+Both are applied to `Profiles/voice.md` as new `writing_laws`, so they are
+always-on rather than live only when this skill is invoked. Two eval cases cover
+the vocabulary swap and the label-to-imperative rewrite.
+
 ## 0.3.0 — 2026-09-20
 
 **Voice-fidelity corrections to `humanize`,** checked against `Profiles/voice.md`

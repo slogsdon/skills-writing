@@ -80,6 +80,24 @@ Long sentences chained with "which" or "that" clauses feel generated. Split them
 - Technical labels → descriptions when speaking to a general audience ("computer scientists" → "people who built them"), but preserve precision when the audience is technical
 - Vague compounding → concrete cause-effect: "in ways that compound" → "those near misses compound"; "consistently, in ways that [verb]" → name what actually accumulates
 
+### Social and short-form register (X, Bluesky)
+
+On social surfaces the audience is broader than the topic, so implementation
+vocabulary gives way to the reader's vocabulary even when the subject is
+technical. Confirmed by Shane's hand edits to the `pi-deferred-skill-catalog`
+posts on 2026-09-21:
+
+- "system prompt" → "configuration"
+- "prompt" → "context"
+
+This is not a brevity substitution. "configuration" is the same character count
+as "system prompt", and "context" is longer than "prompt". It is about which
+words the reader already owns.
+
+LinkedIn kept the implementation terms in the same batch, so the rule is scoped
+to short-form social. Whether LinkedIn is deliberately exempt is an open question
+recorded in `Knowledge/Projects/Personal Brand/Voice Profile Amendment — Social Register`.
+
 ### Preserve accurate qualifiers — never add them
 
 Shane hedges **sparingly and accurately**, and when he is sure he does not soften. Keep the hedges already doing honest work ("so far", "with any certainty") and cut ones that pad a claim.
@@ -163,6 +181,8 @@ These are drawn from actual edits on the AX Shift post:
 | `More specific. More examples. Closer to real use.` | `More specific, with more examples, and closer to real use.` | Filler fragment sequence → prose. A fragment that *lands* a build-up stays. |
 | `AX — Agent Experience —` | `AX (Agent Experience)` | Em-dash definition → parenthetical |
 | `people who built them` instead of `computer scientists` | (context-dependent) | Concrete description when audience isn't technical |
+| `system prompt`, `prompt` (on social) | `configuration`, `context` | Implementation vocabulary → the reader's vocabulary. Not brevity: "configuration" is the same length. |
+| `Sharp edge if you try it:` | `Beware if you try it.` | Coined label plus colon → plain imperative. Direct, second-person, no label. |
 
 ## Deliberately not adopted
 
