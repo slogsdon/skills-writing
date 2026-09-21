@@ -41,6 +41,13 @@ byte-identical from `addyosmani/clarity` (MIT, `scripts/LICENSE.clarity`).
 Diagnostic only, and deliberately score-free: upstream found its own stylometric
 composite came out inverted, with the human control scoring as the riskiest text.
 
+**Recorded a voice baseline** in the vault note `Voice Cadence Baseline`
+(`Knowledge/Publishing/`), measured across eight finished pieces and 8,957 words,
+with the per-piece readings and reproduce commands. Two figures are identical in
+every piece measured: `model_lexis` = 0 and `signpost_opener_share` = 0.00. The
+avoid-lists in `voice.md` describe how the prose already reads rather than setting
+an aspiration. `humanize` and `scripts/README.md` both point at the note.
+
 **Added evals** — 10 cases for `humanize` (including two false-positive cases
 that fail if the skill over-corrects an earned fragment or adds a hedge), 4 for
 `writing-review`, and 3 for `writing-interview`. The hedging, fragment, and

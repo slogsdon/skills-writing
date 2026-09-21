@@ -138,6 +138,19 @@ Do not over-edit. These things should survive the pass:
 8. Never invent a specific. If a better sentence needs a fact, number, or experience only Shane has, leave `[TK: your question]` in the text and list it in your return rather than writing plausible filler.
 9. Return the edited draft. Note any judgment call you made, and flag every `[TK]` you added or found.
 
+## Measuring the pass
+
+`scripts/prose_stats.py` measures the habits this skill edits for: hedge and booster density, anchor density, sentence-length variation, and model-lexis hits. It deliberately produces no composite score.
+
+Measure the same piece before and after, then compare the two readings. The established range for this voice is recorded in the vault note **Voice Cadence Baseline** (`Knowledge/Publishing/`): `hedge_per_100` median 0.86 (range 0.30 to 1.06), `anchors_per_100` median 2.91, `body_sentence_cv` median 0.435, with `model_lexis` and `signpost_opener_share` at zero across every piece measured.
+
+If a pass pushes `hedge_per_100` above that range, the edit is drifting toward the circling register this skill exists to prevent. If it pushes `anchors_per_100` down, specificity was traded away to shorten.
+
+```bash
+python3 scripts/strip_markdown.py draft.md > /tmp/draft.txt
+python3 scripts/prose_stats.py /tmp/draft.txt
+```
+
 ## Example patterns in practice
 
 These are drawn from actual edits on the AX Shift post:

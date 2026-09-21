@@ -52,3 +52,22 @@ watching for this voice specifically:
 
 **Do not use this as a quality gate, and never as an authorship or detector
 verdict.** It locates habits; it cannot tell you whether a piece says anything.
+
+## The recorded baseline
+
+Measured ranges for this voice live in the vault note **Voice Cadence Baseline**
+(`Knowledge/Publishing/Voice Cadence Baseline.md`): eight finished pieces, 8,957
+words, with the per-piece readings, the reproduce commands, and the caveats.
+
+Headline figures — `hedge_per_100` median 0.86 (range 0.30 to 1.06),
+`booster_per_100` median 0.04, `anchors_per_100` median 2.91,
+`body_sentence_cv` median 0.435. And two that are identical across every piece
+measured: `model_lexis` = 0, `signpost_opener_share` = 0.00.
+
+The baseline also records an em-dash split the vault cannot explain on its own:
+the six Agentic Workflow Series posts carry 89 em-dashes between them (roughly
+fifteen each, as parenthetical asides) while both August Inbox drafts carry zero,
+against a stated hard refusal in `Profiles/voice.md`.
+
+When you measure a new piece, append it to that note rather than starting a
+second record.
