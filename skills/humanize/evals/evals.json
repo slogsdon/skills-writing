@@ -217,6 +217,62 @@
           "check": "The warning addresses the reader directly, as in 'your config' rather than 'the prompt'"
         }
       ]
+    },
+    {
+      "id": 13,
+      "category": "scoring_gate_precedence",
+      "prompt": "Humanize this paragraph: \"I have a 327-name scored lead tracker for my product. Additionally, behind it sits a robust CRM with 41 notes and a 16-status funnel, every stage defined. Eight blog posts are finished. Three emails sent. One reply. Zero closes.\"",
+      "expected_output": "\"Additionally\" and \"robust\" are removed. The landing beat survives even though it trips Rule of Three, and is reported as a kept deduction. The return carries a score, the deductions, and before → after changed lines.",
+      "assertions": [
+        {
+          "name": "banned-words-removed",
+          "check": "Neither 'Additionally' nor 'robust' appears in the final draft"
+        },
+        {
+          "name": "landing-beat-kept",
+          "check": "'Three emails sent. One reply. Zero closes.' remains as three separate sentences"
+        },
+        {
+          "name": "kept-deduction-reported",
+          "check": "If the landing beat is penalised, it appears under Deductions as a kept item with a reason, not rewritten"
+        },
+        {
+          "name": "score-reported",
+          "check": "The return states a numeric final score"
+        },
+        {
+          "name": "changed-lines-listed",
+          "check": "The return lists every changed line in before → after form"
+        },
+        {
+          "name": "numbers-preserved",
+          "check": "327, 41, 16, and eight all survive unchanged"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "category": "scoring_gate_protected_ask",
+      "prompt": "Write a short email to Dana confirming we should move our sync. Additionally note the deck is ready. Ask whether Tuesday at 2pm works.",
+      "expected_output": "The email asks whether Tuesday at 2pm works. Any pattern-19 deduction on that ask is reported as kept, not rewritten away.",
+      "assertions": [
+        {
+          "name": "ask-survives",
+          "check": "The final email still asks Dana whether Tuesday at 2pm works"
+        },
+        {
+          "name": "ask-kept-not-cut",
+          "check": "If the ask is penalised under pattern 19, it is listed under Deductions as a kept item with a reason"
+        },
+        {
+          "name": "no-banned-additionally",
+          "check": "'Additionally' does not appear in the final email"
+        },
+        {
+          "name": "score-reported",
+          "check": "The return states a numeric final score and lists changed lines as before → after"
+        }
+      ]
     }
   ]
 }

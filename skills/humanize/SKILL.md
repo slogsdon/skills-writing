@@ -1,14 +1,14 @@
 ---
 name: humanize
 description: >
-  Edit a draft to sound like Shane wrote it — removing AI-typical patterns, restoring conversational flow, and preserving technical precision. Use whenever Shane says: "humanize this", "edit in my voice", "AI detector pass", "make this sound like me", "rewrite this", "edit this post", "clean this up". Also invoke proactively if presented with a draft that contains dramatic colon-reveals, em-dash lists, semicolons between independent clauses, or staccato fragments that restate rather than land — these are markers that text needs a voice pass.
+  Edit a draft to sound like Shane wrote it — removing AI-typical patterns, restoring conversational flow, and preserving technical precision. Use whenever Shane says: "humanize this", "edit in my voice", "AI detector pass", "make this sound like me", "rewrite this", "edit this post", "clean this up". Also invoke before returning any post, email, or message drafted for Shane, to score it against the humanizer rubric (threshold 90). Also invoke proactively if presented with a draft that contains dramatic colon-reveals, em-dash lists, semicolons between independent clauses, or staccato fragments that restate rather than land — these are markers that text needs a voice pass.
 ---
 
 # Humanize / Voice Edit
 
 `Profiles/voice.md` is authoritative for voice. Where this file and that profile disagree, **the profile wins** — read it before editing when it is available.
 
-Edit draft text to match Shane's writing voice. The goal is prose with the structural and rhythmic properties of careful human writing: direct, specific, and recognizably his. A detector result is not the target and this skill does not promise one. The pattern lists below locate habits; they do not grade prose, and a hit is a prompt to read the passage rather than a defect.
+Edit draft text to match Shane's writing voice. The goal is prose with the structural and rhythmic properties of careful human writing: direct, specific, and recognizably his. The pattern lists below locate habits; they do not grade prose, and a hit is a prompt to read the passage rather than a defect. The one grade is the humanizer score in step 9 of the process, and it is a gate on the finished draft, not the goal of the edit.
 
 ## What this skill does
 
@@ -154,11 +154,39 @@ Do not over-edit. These things should survive the pass:
 6. Read the result aloud (mentally). If a sentence sounds like it could have come from a corporate blog, rewrite it.
 7. Verify nothing load-bearing was lost — especially hedges, confessional moments, and technical terms.
 8. Never invent a specific. If a better sentence needs a fact, number, or experience only Shane has, leave `[TK: your question]` in the text and list it in your return rather than writing plausible filler.
-9. Return the edited draft. Note any judgment call you made, and flag every `[TK]` you added or found.
+9. Score the draft with the humanizer rubric (see **Scoring gate** below). Under 90, rewrite only the passages that lost points and score again.
+10. Return the edited draft in the output format below. Note any judgment call you made, and flag every `[TK]` you added or found.
+
+## Scoring gate
+
+Shane's standing instruction (2026-10-19): every piece written for him, whether a post, an email, or a message, is scored with `references/humanizer-rubric.md` before he sees it. A score under 90 means rewrite the parts that lost points and score again. This applies to drafts written from scratch as well as to drafts handed in for a pass.
+
+### How to score
+
+- Score only the deliverable text. Your own wrapper ("Here's the draft") is not scored. A sign-off that belongs in the email ("let me know if Tuesday works") is scored like any other line, and it is protected text when it carries the message's real request (see below).
+- Start at 100. Use only the rubric's deductions. Its "What Good Looks Like" section is not a target: humour, hedges, and opinions are never added to raise a score (see **Deliberately not adopted**).
+- Banned vocabulary costs −5 per occurrence, uncapped. Pattern 7 (clustering) applies on top when two or more banned words share a paragraph.
+- Each of the 24 patterns stacks per occurrence up to 2× its base penalty.
+- A banned word that is the precise technical term (a package *ecosystem*, a *robust* estimator) still costs its points. It is kept under the precedence rule below, not exempted.
+
+### Precedence: voice rules win over the score
+
+When a deduction lands on something this skill protects (a landing fragment, an accurate hedge, a first-person confession, a required technical term, or the message's real request), keep the text. The real request is the thing the message exists to get: "let me know if Tuesday works" in a scheduling email, "would you be open to a call?" in an outreach note. Pattern 19 penalises those phrasings, but rewriting the ask out of a message breaks the message. Reword it only if the new wording keeps the same ask. Record it as `kept (−N): reason` and take the points. Do not rewrite protected text to buy points back. "Three emails sent. One reply. Zero closes." can trip Rule of Three, and it stays.
+
+Rescore at most three times. If the final score is still under 90 because of kept items, report the real number. Never adjust a score to clear the gate.
+
+### Output format
+
+Return, in this order:
+
+1. The final draft.
+2. **Score:** the final number, plus the first-pass number if they differ.
+3. **Deductions:** each remaining deduction as `pattern (−N): "quoted text"`, including every `kept` item and its reason.
+4. **Changed lines:** every line changed by the pass as `before → after`. A new draft written from scratch lists the lines changed between the first scored draft and the final one. If nothing changed, say so.
 
 ## Measuring the pass
 
-`scripts/prose_stats.py` measures the habits this skill edits for: hedge and booster density, anchor density, sentence-length variation, and model-lexis hits. It deliberately produces no composite score.
+`scripts/prose_stats.py` measures the habits this skill edits for: hedge and booster density, anchor density, sentence-length variation, and model-lexis hits. It deliberately produces no composite score. The composite is the rubric score in the **Scoring gate**; these stats are the cross-check that the pass hit 90 without trading away hedges or anchors.
 
 Measure the same piece before and after, then compare the two readings. The established range for this voice is recorded in the vault note **Voice Cadence Baseline** (`Knowledge/Publishing/`): `hedge_per_100` median 0.86 (range 0.30 to 1.06), `anchors_per_100` median 2.91, `body_sentence_cv` median 0.435, with `model_lexis` and `signpost_opener_share` at zero across every piece measured.
 
@@ -191,5 +219,6 @@ Checked against `Profiles/voice.md` and the voice interview transcript, and reje
 - **Making the colon-reveal and semicolon rules contextual.** `voice.md` states both as hard refusals: *"Never write em-dash lists, single-noun colon-reveals, or use semicolons between independent clauses."* Advice to treat them as "a search aid, not a ban" is wrong for this profile, however good it is as general guidance.
 - **A lunch-conversation or whiteboard register test as a hard rule.** His register is consultative by default and formality matches function, not status. A flat spoken-language test strips the written register the profile asks for.
 - **Restoring warmth and humour as positive craft.** Restoring humour where an edit removed it is right for many writers. `voice.md`: humour is *"rare in writing-with-purpose… not a craft move on the page."* Do not add it.
-- **Any detector optimisation, in either direction.** Not a goal and not a claim. Upstream `scripts/prose_stats.py` documents that its own stylometric composite came out inverted.
+- **Detector optimisation.** No claim about any AI detector's verdict, in either direction. Upstream `scripts/prose_stats.py` documents that its own stylometric composite came out inverted. The rubric score in the **Scoring gate** is a different thing: Shane adopted it on 2026-10-19 as a pattern checklist with a threshold, and it stays subordinate to `Profiles/voice.md` through the precedence rule.
+- **The rubric's "What Good Looks Like" list as a target.** It asks for humour, edge, and acknowledged uncertainty. Only the rubric's deductions are adopted.
 - **Inserting hedges, asides, or qualifying phrases as human signals.** Existing texture can be preserved; invented texture is performance.

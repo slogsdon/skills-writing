@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.5.0 — 2026-10-19
+
+**`humanize` gains a scoring gate, on Shane's direct instruction.** Every post,
+email, or message written for him is scored with the vendored humanizer rubric
+(`skills/humanize/references/humanizer-rubric.md`, from
+`ericosiu/ai-marketing-skills`, MIT). Under 90, the passages that lost points are
+rewritten and rescored. The return shows the final score, the remaining
+deductions, and every changed line as before → after.
+
+- **Voice rules still win.** A deduction on protected text (a landing fragment,
+  an accurate hedge, a needed technical term) is kept and reported as
+  `kept (−N): reason`, not rewritten. The loop stops after three rescores and
+  reports the real number.
+- **The message's real request is protected.** A pattern-19 hit on the actual
+  ask ("let me know if Tuesday works") is kept and reported, not rewritten away.
+- **Scoring pinned down** where the rubric is ambiguous: banned words cost −5
+  each with no cap, clustering stacks on top, and patterns cap at 2× base.
+- **"Deliberately not adopted" amended.** Detector claims stay out. The rubric's
+  "What Good Looks Like" list is not a target.
+- **Eval 13** checks that the gate removes banned words without merging the
+  eval-2 landing beat. **Eval 14** checks that an email's ask survives the gate.
+
 ## 0.4.0 — 2026-09-21
 
 **Two register rules taken from Shane's own hand edits to the
