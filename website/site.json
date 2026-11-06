@@ -1,0 +1,8 @@
+{
+  "slug": "writing-skills",
+  "name": "Writing Skills",
+  "origin": "https://projects.logsdon.io",
+  "description": "Six writing skills for Claude Code: a voice edit, Microsoft style, plain language, simplified technical English, a read-only review, and a pre-draft interview.",
+  "lastmod": "2026-10-19",
+  "source": "https://github.com/slogsdon/skills-writing"
+}
