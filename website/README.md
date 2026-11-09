@@ -144,6 +144,16 @@ no effect on the build or the artifact.
   `npx --no-install cf build --mode microsite-production` (packaging only, no deploy).
 - `shasum -a 256 scripts/*.py` in the source repository matches the hashes recorded in its
   `scripts/README.md` for both vendored linters.
+- The step 6 linter run (2026-11-09, Python 3.15.0, source `d4e7ce7`):
+  `python3 -I scripts/strip_markdown.py README.md | python3 -I scripts/prose_stats.py -`.
+  The page quotes the first part of its output verbatim and paraphrases the `LOOK HERE`
+  section (four triads, the short-line note).
+- The marketplace route resolves to this source. On the author's machine,
+  `skills-writing@slogsdon-claude-code-config` is installed at version 0.5.0 from
+  `gitCommitSha` `d4e7ce7`, this revision, with all six skill directories present.
+  `slogsdon/claude-code-config`'s `marketplace.json` lists `skills-writing` with
+  source `slogsdon/skills-writing`, and that repo, the marketplace and the grow kit are
+  all public. This is existing evidence, not a fresh install.
 - Absence of `Profiles/` and any `voice.md` in the source repository at this revision.
 - Skill inventory as read at this revision: six `skills/*/SKILL.md`, two with
   `references/` (`humanize`, `ms-style-pass`), four with `evals/` (`humanize`,
@@ -154,10 +164,11 @@ no effect on the build or the artifact.
 No skill was run and no plugin was installed while building this site. Product claims on
 the pages are quoted from the source revision, and the pages say so where it matters.
 
-- The installation sentence on the guide page, from `README.md` line 7. Not executed.
-  The marketplace's own add/install commands are deliberately absent: this repository's
-  README does not document them, and the marketplace repository was not used as a content
-  source.
+- The install commands on the guide page (`/plugin marketplace add
+  slogsdon/claude-code-config`, `/plugin install skills-writing@slogsdon-claude-code-config`,
+  `pi install git:github.com/slogsdon/skills-writing`), quoted from
+  `slogsdon/loop-and-gate-grow-kit` `reference/tools.md`. Not run for this page. The pi
+  route was not exercised at all.
 - The six trigger phrases on the guide page, from the `description` front matter of each
   `SKILL.md`. Read, not invoked.
 - The pass order `interview → draft → humanize → ms-style-pass`, from `README.md`

@@ -16,10 +16,11 @@ $this->layout('partials::layout', [
     <h1 id="guide-title">Getting <span class="t-accent">started.</span></h1>
     <p class="t-lead">Six steps. Step 1 is a decision rather than an action, because it
         changes what the later steps are worth to you.</p>
-    <p class="t-meta guide-source">The installation sentence below is quoted from the
-        project README. The scripts are quoted from <code>scripts/README.md</code>. Neither
-        was executed while this page was built: no plugin was installed and no draft was
-        passed through the skills.</p>
+    <p class="t-meta guide-source">The installation sentence is quoted from the project
+        README, and the install commands from the Loop &amp; Gate Grow Kit, which documents
+        them. The scripts are quoted from <code>scripts/README.md</code>. The linter run in
+        step 6 was executed for this page. Nothing else was: no plugin was installed and no
+        draft was passed through the skills.</p>
 </section>
 
 <div class="assembly">
@@ -75,10 +76,13 @@ $this->layout('partials::layout', [
                 <p>Install via the <a href="https://github.com/slogsdon/claude-code-config">slogsdon-claude-code-config
                     marketplace</a>.</p>
             </blockquote>
-            <p>That is the whole of it. The project README does not print the marketplace
-                commands, so this page does not invent them: add the marketplace and install
-                the plugin following the marketplace repository’s own instructions, then come
-                back to step 3.</p>
+            <p>The README stops there. The commands are documented in a sibling project, in the
+                <a href="https://github.com/slogsdon/loop-and-gate-grow-kit/blob/main/reference/tools.md">Loop
+                &amp; Gate Grow Kit’s <code>reference/tools.md</code></a>. In Claude Code:</p>
+            <pre><code>/plugin marketplace add slogsdon/claude-code-config
+/plugin install skills-writing@slogsdon-claude-code-config</code></pre>
+            <p>On pi, the same file gives:</p>
+            <pre><code>pi install git:github.com/slogsdon/skills-writing</code></pre>
             <p>There is nothing else to install. The skills are Markdown, the two linters are
                 Python, and neither the plugin nor this site needs a build step of its own.</p>
         </div>
@@ -167,6 +171,26 @@ python3 scripts/prose_stats.py /tmp/draft.txt</code></pre>
                 <code>scripts/README.md</code> is explicit that this is not a quality gate and
                 never an authorship or detector verdict. Measure the same piece before and
                 after a pass and compare the two readings.</p>
+            <p>One run you can repeat measures the project’s own <code>README.md</code> at
+                commit <code>d4e7ce7</code>, on Python 3.15:</p>
+            <pre><code>python3 scripts/strip_markdown.py README.md | python3 scripts/prose_stats.py -</code></pre>
+            <p>The first part of the output:</p>
+            <pre><code>220 words, 17 sentences, 7 paragraphs
+  note: under 400 words. Cadence and density figures are unstable at this length, and so is any judgement made from a short excerpt.
+
+MEASUREMENTS (descriptive, not targets)
+  body_sentence_cv           0.994
+  short_line_share           0.294
+  hedge_per_100              0.0
+  booster_per_100            0.0
+  anchors_per_100            10.91
+  signpost_opener_share      0.0</code></pre>
+            <p>Further down, under <code>LOOK HERE</code>, it lists four triads, one of them
+                “on agentic workflows / web standards / payments engineering”. It also notes that
+                a third of the lines are under eight words. In a README those are list items, so
+                the script’s own advice applies: read <code>body_sentence_cv</code> and ignore
+                the short-line share. A README isn’t written in anyone’s voice, so the run shows
+                the shape of the output. It says nothing about whether the prose is good.</p>
             <p>To confirm the vendored files are the upstream ones, <code>scripts/README.md</code>
                 gives the check:</p>
             <pre><code>shasum -a 256 scripts/*.py</code></pre>
