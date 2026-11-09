@@ -9,10 +9,9 @@ from that revision: `README.md`, `CHANGELOG.md`, `.claude-plugin/plugin.json`, t
 `skills/*/SKILL.md` files, their `references/` and `evals/` files, and
 `scripts/README.md`.
 
-**Publication status: planned.** Confirmed on 2026-11-05 as the eighth microsite in the
-collection (`T12` in `shane.logsdon.io` `TASKS.md`, `tasks/plan.md`). It is built and
-verified as an artifact; nothing here was deployed, so the Worker name and route in
-`cloudflare.config.ts` are reserved, not live.
+**Publication status: published** on 2026-11-09 as the eighth microsite in the
+collection (`T12` in `shane.logsdon.io` `TASKS.md`, `tasks/plan.md`). One content item
+is open: the guide has no worked before-and-after editing example.
 
 ## Build
 
@@ -195,9 +194,17 @@ the pages are quoted from the source revision, and the pages say so where it mat
 
 ## Deployment
 
-Not performed from this repository: no `cf deploy`, no `cf previews deploy`, no Cloudflare
-API call. This repository only produces the artifact and the Worker configuration. The hub
-owns the hostname (`projects.logsdon.io`), the sitemap index, and the slashless redirect;
-this Worker claims only `projects.logsdon.io/writing-skills/*`.
+Published 2026-11-09 with a manual deploy from this directory. There is no Workers
+Builds connection yet, so a content change needs the same steps:
 
-Publication waits on Checkpoint C (`T12`), not on build readiness.
+```sh
+npm ci
+npm run build:production
+npx --no-install cf build --mode microsite-production
+npx --no-install cf deploy --prebuilt --mode microsite-production
+```
+
+Before going live, the site was checked on a noindex Worker Preview from
+`npx --no-install cf previews deploy microsite --mode microsite`. The hub owns the
+hostname (`projects.logsdon.io`), the sitemap index, and the slashless redirect;
+this Worker claims only `projects.logsdon.io/writing-skills/*`.
