@@ -1,7 +1,7 @@
 ---
 name: humanize
 description: >
-  Edit a draft to sound like Shane wrote it — removing AI-typical patterns, restoring conversational flow, and preserving technical precision. Use whenever Shane says: "humanize this", "edit in my voice", "AI detector pass", "make this sound like me", "rewrite this", "edit this post", "clean this up". Also invoke before returning any post, email, or message drafted for Shane, to score it against the humanizer rubric (threshold 90). Also invoke proactively if presented with a draft that contains dramatic colon-reveals, em-dash lists, semicolons between independent clauses, or staccato fragments that restate rather than land — these are markers that text needs a voice pass.
+  Edit a draft to sound like Shane wrote it — removing AI-typical patterns, restoring conversational flow, and preserving technical precision. Use whenever Shane says: "humanize this", "edit in my voice", "AI detector pass", "make this sound like me", "rewrite this", "edit this post", "clean this up". Also invoke before returning any post, email, or message drafted for Shane, to score it against the humanizer rubric (threshold 90). Also invoke proactively if presented with a draft that contains dramatic colon-reveals, em-dash lists, semicolons between independent clauses, staccato fragments that restate rather than land, or any tic in the Rhetorical tics table (negation-first reveals, aphoristic closers, straw-man knockdowns, dressed metaphors, and the rest) — these are markers that text needs a voice pass.
 ---
 
 # Humanize / Voice Edit
@@ -128,6 +128,23 @@ These shapes usually indicate machine-made prose. Each is a prompt to read the p
 4. **Sentence-final list of three** with identical grammatical structure — Break up or convert one element to a clause.
 5. **Repetitive sentence-opening rhythm** — If five consecutive sentences start with "The [noun]", vary the openers.
 
+## Rhetorical tics to detect (added 2026-11-11)
+
+Shane flagged these ten as tells to catch on every run. Scan for each one and rewrite every hit unless it is clearly his own phrasing doing real work. List each hit you fixed or kept in your return.
+
+| Tic | Example | What it looks like and the fix |
+|---|---|---|
+| Negation-first reveal | *It is not a wrong answer. It is a non-answer.* | "It's not X. It's Y." Say Y directly, with the reason. |
+| Significance designation | *It is the leg that answers the actual question.* | Labels something as the one that matters instead of showing why. State what it showed. |
+| Abstraction agency | *Median hides it. / The table shows it.* | An abstraction or artifact is the subject of an action verb. Put the person or the specific number in the sentence. |
+| Deferred noun | *Five of those six rows are one cluster. The sixth is not.* | Withholds the thing to set up a reveal. Name it up front. |
+| Coy or thesis-shaped header | *What "exhausted" means / The one gap that does clear the bar* | Headers that tease or state a thesis. Use a plain, descriptive header. |
+| Aphoristic closer | *It is the kind of number that looks like evidence and is not.* | A quotable line that ends a paragraph and adds nothing. Cut it or replace it with the concrete consequence. |
+| Straw-man knockdown | *"It thinks twice as long" is the obvious reading, and it is wrong.* | Invents a reading nobody stated so it can knock it down. State the correct reading and the evidence. |
+| Fragment cadence | *Six legs. One GPU, one server build, one sampler, one question set.* | Verbless fragments used as setup or inventory. Write a full sentence. This is different from a landing fragment that closes a build-up with new specifics, which stays (see above). |
+| Dressed metaphor | *That is information loss wearing the costume of a style fix.* | "X wearing the costume of Y", "X dressed as Y", and similar personified metaphors. Say literally what happened. |
+| Label-first framing | *The fucking left column of this table.* | Leads with a label or pointer phrase standing alone as a sentence. Fold it into a sentence that says what the thing is and why it matters. |
+
 ## What to preserve
 
 Do not over-edit. These things should survive the pass:
@@ -141,7 +158,7 @@ Do not over-edit. These things should survive the pass:
 ## Process
 
 1. Read the full draft. Identify the core argument and voice register.
-2. Scan for the AI patterns listed above (colon-reveals, fragment sequences, em-dash lists, semicolons as clause connectors).
+2. Scan for the AI patterns listed above (colon-reveals, fragment sequences, em-dash lists, semicolons as clause connectors) and every tic in **Rhetorical tics to detect**.
 3. Apply structural edits first, then vocabulary/phrasing.
 4. Run a **preservation** pass. This is the step that protects the voice, and it is the one that gets skipped:
    - Are the accurate hedges that were already there still there?
